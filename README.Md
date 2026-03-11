@@ -2,7 +2,7 @@
 
 ## Why I built this
 
-I’m a **.NET  **, and I wanted to understand how working with **SQL in a Node.js project** compares to what I’m used to in the .NET world.
+I’m a .NET Engineer , and I wanted to understand how working with **SQL in a Node.js project** compares to what I’m used to in the .NET world.
 
 A lot of my background is in building structured backend APIs with clear separation of concerns, database access layers, and maintainable code. With this project, I wanted to explore how those same ideas translate into the **Node.js + Express + PostgreSQL** ecosystem.
 
