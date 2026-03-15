@@ -1,4 +1,4 @@
-import { createEmployeeService, deleteEmpoyeeService, getAllEmployeesService, getEmployeeByIDService, updateEmployeeService } from "../models/employeeModel.js";
+import { createEmployeeService, deleteEmpoyeeService, getAllEmployeesAndDepartments, getAllEmployeesService, getEmployeeByIDService, updateEmployeeService } from "../models/employeeModel.js";
 
 const handleReponse = (res, status,message, data = null) => { 
     res.status(status).json({
@@ -9,12 +9,10 @@ const handleReponse = (res, status,message, data = null) => {
 };
 
 export const createEmployee = async (req , res, next) => {
-    const {firstname, lastname, department } = req.body;
-
-    console.log(firstname, lastname, department );
+    const {firstname, lastname, departmentId } = req.body;
 
     try{
-        const newEmployee = await createEmployeeService(firstname,lastname, department);
+        const newEmployee = await createEmployeeService(firstname,lastname, departmentId);
         handleReponse(res, 201, "User created Successfully", newEmployee);
     } catch (err){
         //apassing to error handling middleware
@@ -44,10 +42,10 @@ export const getEmployeeById = async (req , res, next) => {
 }
 
 export const updateEmployee = async (req , res, next) => {
-    const {firstname, lastname, department} = req.body;
+    const {firstname, lastname, departmentId} = req.body;
     try{
         
-        const employee = await updateEmployeeService(firstname, lastname, department,req.params.id);
+        const employee = await updateEmployeeService(firstname, lastname, departmentId,req.params.id);
         if (!employee) return handleReponse(res, 404, "Employee not found");
 
         handleReponse(res, 200, "Employee updated sucessfully", employee);
@@ -64,6 +62,20 @@ export const deleteEmployee = async (req , res, next) => {
         if (!employee) return handleReponse(res, 404, "Employee not found");
 
         handleReponse(res, 200, "Employee deleted sucessfully", employee);
+    } catch (err){
+        //apassing to error handling middleware
+        next(err);
+    }
+}
+
+
+
+export const getEmployeeData = async (req , res, next) => {
+    try{
+        
+        const employee = await getAllEmployeesAndDepartments();
+
+        handleReponse(res, 200, "Employee and their departments sucessfully", employee);
     } catch (err){
         //apassing to error handling middleware
         next(err);

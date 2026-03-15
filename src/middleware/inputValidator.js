@@ -3,7 +3,7 @@ import Joi from 'joi';
 const employeeSchema = Joi.object({
     firstname: Joi.string().min(3).required(),
     lastname: Joi.string().min(3).required(),
-    department: Joi.string().min(3).required(),
+    departmentId: Joi.number().required(),
 });
 
 const validateEmployee = (req, res, next) => { 
