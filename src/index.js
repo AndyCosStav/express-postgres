@@ -5,6 +5,8 @@ import pool from "./config/db.js"
 import employeeRoutes from "./routes/employeeRoute.js"
 import errorHandler from './middleware/errorHandler.js';
 import createUserTable from './data/createEmployeesTable.js';
+import createDepartmentsTable from './data/createDepartmentsTable.js';
+import seedDepartmentsTable from './data/seedDepartments.js';
 
 dotenv.config();
 
@@ -24,6 +26,11 @@ app.use(errorHandler);
 
 //create table before we do anything
 createUserTable();
+
+createDepartmentsTable();
+
+//seed data
+seedDepartmentsTable();
 
 //testing pg
 app.get("/", async( req, res) => {
